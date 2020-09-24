@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -9,8 +10,21 @@ namespace SQLTestDatabase
     {
     }
 
+    public abstract class BaseEntity
+    {
+        protected BaseEntity()
+        {
+            FechaCreacion = DateTime.Now;
+            FechaModificacion = DateTime.Now;
+        }
+        [DataType(DataType.DateTime)]
+        public DateTime FechaCreacion { get; private set; }
+        [DataType(DataType.DateTime)]
+        public DateTime? FechaModificacion { get; set; }
+    }
 
-    public class Empresa
+
+    public class Empresa: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -21,7 +35,7 @@ namespace SQLTestDatabase
 
     }
 
-    public class TipoVehiculo
+    public class TipoVehiculo : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -29,7 +43,7 @@ namespace SQLTestDatabase
         public string Descripcion { get; set; }
     }
 
-    public class Vehiculo
+    public class Vehiculo : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -45,7 +59,7 @@ namespace SQLTestDatabase
 
 
 
-    public class TipoPersona
+    public class TipoPersona : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -55,7 +69,7 @@ namespace SQLTestDatabase
 
 
 
-    public class Persona
+    public class Persona: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -71,7 +85,7 @@ namespace SQLTestDatabase
 
     }
 
-    public class Pedido
+    public class Pedido : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -81,7 +95,7 @@ namespace SQLTestDatabase
 
     }
 
-    public class Viaje
+    public class Viaje: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -91,7 +105,7 @@ namespace SQLTestDatabase
 
     }
 
-    public class ViajeChofer
+    public class ViajeChofer: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -100,7 +114,7 @@ namespace SQLTestDatabase
         public long PersonaId { get; set; }
         public virtual Persona Persona { get; set; }
     }
-    public class ViajeChoferPedido
+    public class ViajeChoferPedido : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
