@@ -27,8 +27,6 @@ namespace SQLTestDatabase
                       x.FechaFin <= lastDay);
 
 
-
-
                 //Los 5 clientes más lejanos
                 var items = context.Persona.Where(x=> x.TipoPersonaId == TipoCte).OrderByDescending(u => u.FechaCreacion).Take(5);
 
@@ -38,8 +36,7 @@ namespace SQLTestDatabase
 
                 //Un listado de los últimos 10 pedidos, sabiendo de qué cliente son, qué chofer llevó el pedido y qué camioneta se utilizó.
 
-
-
+                var ultimospedidos = context.PedidoCte.OrderByDescending(z => z.FechaPedido).GroupBy(a => a.PersonaId).Where(grp => grp.Count() > 1).SelectMany(grp => grp.Select(r => r)).Take(10);
 
             }
 
