@@ -7,8 +7,15 @@ namespace SQLTestDatabase
 {
     class Context : DbContext
     {
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<TipoVehiculo> TipoVehiculo { get; set; }
+        public DbSet<Vehiculo> Vehiculo { get; set; }
+        public DbSet<TipoPersona> TipoPersona { get; set; }
+        public DbSet<Persona> Persona { get; set; }
+        public DbSet<Pedido> Pedido { get; set; }
+        public DbSet<Viaje> Viaje { get; set; }
+        public DbSet<ViajeChofer> ViajeChofer { get; set; }
+        public DbSet<ViajeChofer> ViajeChoferPedido { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

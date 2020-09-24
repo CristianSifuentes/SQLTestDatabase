@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SQLTestDatabase
@@ -11,6 +12,7 @@ namespace SQLTestDatabase
 
     public class Empresa
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string RFC { get; set; }
@@ -21,6 +23,7 @@ namespace SQLTestDatabase
 
     public class TipoVehiculo
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -28,6 +31,7 @@ namespace SQLTestDatabase
 
     public class Vehiculo
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Marca { get; set; }
         public string Anio { get; set; }
@@ -43,6 +47,7 @@ namespace SQLTestDatabase
 
     public class TipoPersona
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -52,6 +57,7 @@ namespace SQLTestDatabase
 
     public class Persona
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string ApellidoPaterno { get; set; }
@@ -65,8 +71,19 @@ namespace SQLTestDatabase
 
     }
 
+    public class Pedido
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string Numero { get; set; }
+        public int CantidadProductos { get; set; }
+        public int Descripcion { get; set; }
+
+    }
+
     public class Viaje
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Numero { get; set; }
         public DateTime FechaInicio { get; set; }
@@ -74,16 +91,31 @@ namespace SQLTestDatabase
 
     }
 
-
-
-    public class Pedido
+    public class ViajeChofer
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Numero { get; set; }
-        public int CantidadProductos { get; set; }
-        public int Descripcion { get; set; }
+        public long ViajeId { get; set; }
+        public virtual Viaje Viaje { get; set; }
+        public long PersonaId { get; set; }
+        public virtual Persona Persona { get; set; }
+    }
+    public class ViajeChoferPedido
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public long ViajeId { get; set; }
+        public virtual Viaje Viaje { get; set; }
+        public long PedidoId { get; set; }
+        public virtual Pedido Pedido { get; set; }
+        public string Estatus { get; set; }
+        public string Descripcion { get; set; }
+
 
     }
+
+
+
 
 
 
