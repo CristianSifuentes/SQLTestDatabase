@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SQLTestDatabase;
 
 namespace SQLTestDatabase.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200924190853_1_4")]
+    partial class _1_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,8 +58,8 @@ namespace SQLTestDatabase.Migrations
                     b.Property<int>("CantidadProductos")
                         .HasColumnType("int");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Descripcion")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
@@ -92,10 +94,16 @@ namespace SQLTestDatabase.Migrations
                     b.Property<DateTime>("FechaPedido")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PedidoId")
+                    b.Property<long>("PedidoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("PedidoId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonaId")
+                    b.Property<long>("PersonaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("PersonaId1")
                         .HasColumnType("int");
 
                     b.Property<string>("Producto")
@@ -103,9 +111,9 @@ namespace SQLTestDatabase.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PedidoId");
+                    b.HasIndex("PedidoId1");
 
-                    b.HasIndex("PersonaId");
+                    b.HasIndex("PersonaId1");
 
                     b.ToTable("PedidoCte");
                 });
@@ -126,7 +134,10 @@ namespace SQLTestDatabase.Migrations
                     b.Property<int>("Edad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmpresaId")
+                    b.Property<long?>("EmpresaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("EmpresaId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCreacion")
@@ -144,14 +155,17 @@ namespace SQLTestDatabase.Migrations
                     b.Property<string>("Sexo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TipoPersonaId")
+                    b.Property<long?>("TipoPersonaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("TipoPersonaId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpresaId");
+                    b.HasIndex("EmpresaId1");
 
-                    b.HasIndex("TipoPersonaId");
+                    b.HasIndex("TipoPersonaId1");
 
                     b.ToTable("Persona");
                 });
@@ -229,12 +243,15 @@ namespace SQLTestDatabase.Migrations
                     b.Property<string>("Placas")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoVehiculoId")
+                    b.Property<long>("TipoVehiculoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("TipoVehiculoId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoVehiculoId");
+                    b.HasIndex("TipoVehiculoId1");
 
                     b.ToTable("Vehiculo");
                 });
@@ -279,17 +296,23 @@ namespace SQLTestDatabase.Migrations
                     b.Property<DateTime?>("FechaModificacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PersonaId")
+                    b.Property<long>("PersonaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("PersonaId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("ViajeId")
+                    b.Property<long>("ViajeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("ViajeId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonaId");
+                    b.HasIndex("PersonaId1");
 
-                    b.HasIndex("ViajeId");
+                    b.HasIndex("ViajeId1");
 
                     b.ToTable("ViajeChofer");
                 });
@@ -298,50 +321,40 @@ namespace SQLTestDatabase.Migrations
                 {
                     b.HasOne("SQLTestDatabase.Pedido", "Pedido")
                         .WithMany()
-                        .HasForeignKey("PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PedidoId1");
 
                     b.HasOne("SQLTestDatabase.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("PersonaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonaId1");
                 });
 
             modelBuilder.Entity("SQLTestDatabase.Persona", b =>
                 {
                     b.HasOne("SQLTestDatabase.Empresa", "Empresa")
                         .WithMany()
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("EmpresaId1");
 
                     b.HasOne("SQLTestDatabase.TipoPersona", "TipoPersona")
                         .WithMany()
-                        .HasForeignKey("TipoPersonaId");
+                        .HasForeignKey("TipoPersonaId1");
                 });
 
             modelBuilder.Entity("SQLTestDatabase.Vehiculo", b =>
                 {
                     b.HasOne("SQLTestDatabase.TipoVehiculo", "TipoVehiculo")
                         .WithMany()
-                        .HasForeignKey("TipoVehiculoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TipoVehiculoId1");
                 });
 
             modelBuilder.Entity("SQLTestDatabase.ViajeChofer", b =>
                 {
                     b.HasOne("SQLTestDatabase.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("PersonaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonaId1");
 
                     b.HasOne("SQLTestDatabase.Viaje", "Viaje")
                         .WithMany()
-                        .HasForeignKey("ViajeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ViajeId1");
                 });
 #pragma warning restore 612, 618
         }

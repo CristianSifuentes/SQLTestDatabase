@@ -51,7 +51,7 @@ namespace SQLTestDatabase
         public string Anio { get; set; }
         public string Placas { get; set; }
         public string Descripcion { get; set; }
-        public long TipoVehiculoId { get; set; }
+        public int TipoVehiculoId { get; set; }
         public virtual TipoVehiculo TipoVehiculo { get; set; }
 
     }
@@ -79,8 +79,10 @@ namespace SQLTestDatabase
         public int Edad { get; set; }
         public string Sexo { get; set; }
         public string RFC { get; set; }
-        public long? EmpresaId { get; set; }
+        public int? EmpresaId { get; set; }
         public virtual Empresa Empresa { get; set; }
+        public int? TipoPersonaId { get; set; }
+        public virtual TipoPersona TipoPersona { get; set; }
 
 
     }
@@ -91,7 +93,7 @@ namespace SQLTestDatabase
         public int Id { get; set; }
         public string Numero { get; set; }
         public int CantidadProductos { get; set; }
-        public int Descripcion { get; set; }
+        public string Descripcion { get; set; }
 
     }
 
@@ -109,18 +111,18 @@ namespace SQLTestDatabase
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public long ViajeId { get; set; }
+        public int ViajeId { get; set; }
         public virtual Viaje Viaje { get; set; }
-        public long PersonaId { get; set; }
+        public int PersonaId { get; set; }
         public virtual Persona Persona { get; set; }
     }
     public class ViajeChoferPedido : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public long ViajeId { get; set; }
+        public int ViajeId { get; set; }
         public virtual Viaje Viaje { get; set; }
-        public long PedidoId { get; set; }
+        public int PedidoId { get; set; }
         public virtual Pedido Pedido { get; set; }
         public string Estatus { get; set; }
         public string Descripcion { get; set; }
@@ -133,9 +135,9 @@ namespace SQLTestDatabase
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public long PedidoId { get; set; }
+        public int PedidoId { get; set; }
         public virtual Pedido Pedido { get; set; }
-        public long PersonaId { get; set; }
+        public int PersonaId { get; set; }
         public virtual Persona Persona { get; set; }
         public DateTime FechaPedido { get; set; }
         public string Producto { get; set; }
