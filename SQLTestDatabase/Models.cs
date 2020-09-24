@@ -129,6 +129,21 @@ namespace SQLTestDatabase
     }
 
 
+    public class PedidoCte : BaseEntity
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public long PedidoId { get; set; }
+        public virtual Pedido Pedido { get; set; }
+        public long PersonaId { get; set; }
+        public virtual Persona Persona { get; set; }
+        public DateTime FechaPedido { get; set; }
+        public string Producto { get; set; }
+        public string Descripcion { get; set; }
+
+    }
+
+
 
 
 

@@ -16,7 +16,10 @@ namespace SQLTestDatabase
         public DbSet<Viaje> Viaje { get; set; }
         public DbSet<ViajeChofer> ViajeChofer { get; set; }
         public DbSet<ViajeChofer> ViajeChoferPedido { get; set; }
+        public DbSet<PedidoCte> PedidoCte { get; set; }
 
+
+       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"data source=LAPTOP-3NTPDV2V; initial catalog=CompanyTestDB;persist security info=True; Integrated Security=SSPI;");
